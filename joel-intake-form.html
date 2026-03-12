@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Work With Joel - Joel The Beloved</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root{--gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:#7a6330;--ink:#0D0D0D;--surface:#161616;--surface2:#1E1D1B;--text:#F0EDE6;--muted:#8A8578;--border:#2a2a2a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--text);font-family:"DM Sans",sans-serif;font-weight:300;min-height:100vh;overflow:hidden;}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--gold);transition:width 0.6s cubic-bezier(.4,0,.2,1);z-index:999;}
+.top-nav{position:fixed;top:0;left:0;right:0;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;z-index:100;}
+.nav-brand{font-family:"Cormorant Garamond",serif;font-size:1rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;}
+.nav-step-count{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+.nav-step-count span{color:var(--gold);}
+.stage{height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 40px;position:relative;overflow:hidden;}
+.stage::before{content:attr(data-bg);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:"Cormorant Garamond",serif;font-size:18vw;font-weight:700;color:rgba(201,168,76,0.03);pointer-events:none;white-space:nowrap;z-index:0;}
+.slide{display:none;max-width:680px;width:100%;position:relative;z-index:2;}
+.slide.active{display:block;animation:slideIn 0.5s cubic-bezier(.4,0,.2,1) forwards;}
+.slide.exit{animation:slideOut 0.4s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes slideIn{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-30px);}}
+.welcome-screen{text-align:center;}
+.welcome-eyebrow{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:16px;}
+.welcome-eyebrow::before,.welcome-eyebrow::after{content:"";display:block;width:32px;height:1px;background:var(--gold);}
+.welcome-title{font-family:"Cormorant Garamond",serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;color:var(--text);margin-bottom:12px;}
+.welcome-title em{font-style:italic;color:var(--gold);}
+.welcome-title strong{font-weight:700;display:block;}
+.welcome-sub{font-size:1rem;color:var(--muted);line-height:1.9;max-width:480px;margin:24px auto 40px;}
+.welcome-meta{display:flex;gap:32px;justify-content:center;margin-bottom:48px;flex-wrap:wrap;}
+.welcome-meta-item{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+.welcome-meta-item::before{content:"✦ ";color:var(--gold);}
+.btn-start{font-family:"Syne",sans-serif;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:18px 48px;border:none;cursor:pointer;transition:all 0.3s;}
+.btn-start:hover{background:var(--gold-light);transform:translateY(-2px);}
+.sec-header{text-align:center;}
+.sec-eyebrow{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.sec-title{font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--text);line-height:1.1;margin-bottom:16px;}
+.sec-title em{font-style:italic;color:var(--gold);}
+.sec-sub{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:40px;}
+.q-num{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.q-badge{background:rgba(201,168,76,0.12);border:1px solid var(--gold-dim);width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:0.85rem;font-weight:700;color:var(--gold);}
+.q-req{color:var(--gold);margin-left:4px;}
+.q-label{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;line-height:1.2;color:var(--text);margin-bottom:8px;}
+.q-label em{font-style:italic;color:var(--gold);}
+.q-hint{font-size:0.85rem;color:var(--muted);margin-bottom:36px;line-height:1.7;}
+.q-input{width:100%;background:transparent;border:none;border-bottom:2px solid var(--border);padding:16px 0;font-family:"DM Sans",sans-serif;font-size:1.2rem;font-weight:300;color:var(--text);outline:none;transition:border-color 0.3s;caret-color:var(--gold);}
+.q-input:focus{border-bottom-color:var(--gold);}
+.q-input::placeholder{color:var(--muted);opacity:0.5;}
+.q-textarea{width:100%;background:transparent;border:none;border-bottom:2px solid var(--border);padding:16px 0;font-family:"DM Sans",sans-serif;font-size:1.1rem;font-weight:300;color:var(--text);outline:none;resize:none;min-height:100px;transition:border-color 0.3s;caret-color:var(--gold);}
+.q-textarea:focus{border-bottom-color:var(--gold);}
+.q-textarea::placeholder{color:var(--muted);opacity:0.5;}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:8px;}
+.choice{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid var(--border);cursor:pointer;transition:all 0.25s;user-select:none;}
+.choice:hover{border-color:var(--gold-dim);background:rgba(201,168,76,0.04);}
+.choice.selected{border-color:var(--gold);background:rgba(201,168,76,0.08);}
+.choice-key{font-family:"Syne",sans-serif;font-size:0.65rem;font-weight:700;color:var(--gold-dim);border:1px solid var(--border);width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s;}
+.choice.selected .choice-key{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.choice-label{font-size:0.95rem;color:var(--text);font-weight:300;}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+.chip{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--border);color:var(--muted);padding:10px 20px;cursor:pointer;transition:all 0.25s;user-select:none;}
+.chip:hover{border-color:var(--gold-dim);color:var(--text);}
+.chip.selected{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.08);}
+.q-actions{display:flex;align-items:center;gap:16px;margin-top:32px;}
+.btn-next{font-family:"Syne",sans-serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:14px 32px;border:none;cursor:pointer;transition:all 0.3s;}
+.btn-next:hover{background:var(--gold-light);transform:translateY(-1px);}
+.btn-next:disabled{opacity:0.3;cursor:not-allowed;transform:none;}
+.btn-back{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;transition:color 0.3s;padding:14px 0;}
+.btn-back:hover{color:var(--text);}
+.enter-hint{font-size:0.72rem;color:var(--muted);margin-left:auto;display:flex;align-items:center;gap:6px;}
+.enter-hint kbd{background:var(--surface2);border:1px solid var(--border);padding:2px 6px;font-size:0.65rem;font-family:monospace;color:var(--muted);}
+.q-error{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.1em;color:#e06060;margin-top:8px;display:none;}
+.q-error.show{display:block;}
+.thankyou{text-align:center;}
+.ty-icon{font-size:3rem;margin-bottom:28px;display:block;}
+.ty-title{font-family:"Cormorant Garamond",serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;line-height:1.1;color:var(--text);margin-bottom:12px;}
+.ty-title em{font-style:italic;color:var(--gold);}
+.ty-sub{font-size:0.95rem;color:var(--muted);line-height:1.9;max-width:440px;margin:20px auto 40px;}
+.ty-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.ty-link{font-family:"Syne",sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:3px;transition:all 0.3s;}
+.ty-link:hover{color:var(--gold);border-color:var(--gold);}
+.dots{position:fixed;bottom:32px;left:40px;display:flex;gap:8px;z-index:100;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all 0.3s;}
+.dot.active{background:var(--gold);width:20px;border-radius:3px;}
+.dot.done{background:var(--gold-dim);}
+.kb-hint{position:fixed;bottom:32px;right:40px;font-family:"Syne",sans-serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;opacity:0.6;}
+.kb-hint kbd{background:var(--surface2);border:1px solid var(--border);padding:3px 7px;font-size:0.6rem;color:var(--muted);font-family:monospace;}
+@media(max-width:640px){.top-nav{padding:16px 20px;}.stage{padding:80px 24px 100px;}.welcome-meta{flex-direction:column;gap:12px;align-items:center;}.dots{left:20px;bottom:20px;}.kb-hint{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- Netlify Form - detected at deploy, submitted via fetch -->
+<form id="netlify-form" name="joel-intake" netlify data-netlify="true" style="display:none;">
+  <input type="hidden" name="form-name" value="joel-intake"/>
+  <input name="Name / Organisation" id="fs-name"/>
+  <input name="email" id="fs-email"/>
+  <input name="Phone" id="fs-phone"/>
+  <input name="Business Profile" id="fs-profile"/>
+  <input name="Industry" id="fs-industry"/>
+  <input name="Biggest Challenge" id="fs-challenge"/>
+  <input name="Service Interested In" id="fs-service"/>
+  <input name="Budget Range" id="fs-budget"/>
+  <input name="Timeline" id="fs-timeline"/>
+  <input name="Additional Notes" id="fs-notes"/>
+</form>
+
+<div class="progress-bar" id="progressBar" style="width:0%"></div>
+<div class="top-nav">
+  <a href="https://jdbconsults.netlify.app/" class="nav-brand">Joel The Beloved</a>
+  <div class="nav-step-count" id="stepCount"></div>
+</div>
+<div class="stage" id="stage" data-bg="WORK">
+
+  <div class="slide active" id="s0">
+    <div class="welcome-screen">
+      <div class="welcome-eyebrow">Joel The Beloved</div>
+      <h1 class="welcome-title">Work With<br><em>Osamudiamen</em><br><strong>Joel Osagie</strong></h1>
+      <p class="welcome-sub">Unleashing Potential, Driving Success. Tell me about you and let us build something uncommon together.</p>
+      <div class="welcome-meta">
+        <div class="welcome-meta-item">About 3 minutes</div>
+      </div>
+      <button class="btn-start" id="btnStart">Let's Begin &rarr;</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s1">
+    <div class="sec-header">
+      <div class="sec-eyebrow">Section 1 of 3</div>
+      <h2 class="sec-title">Your <em>Details</em></h2>
+      <p class="sec-sub">Let's start with who you are.</p>
+      <button class="btn-start" id="btnSec1">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s2">
+    <div class="q-num"><div class="q-badge">1</div> Name <span class="q-req">*</span></div>
+    <h2 class="q-label">What's the name of your <em>individual or organisation?</em></h2>
+    <p class="q-hint">This helps me address you properly in our conversation.</p>
+    <input class="q-input" id="i1" type="text" placeholder="e.g. Henry Attah / LifeGate Global" autocomplete="off"/>
+    <div class="q-error" id="e1">Please enter your name or organisation.</div>
+    <div class="q-actions">
+      <button class="btn-next" id="n1" disabled>OK &rarr;</button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+  </div>
+
+  <div class="slide" id="s3">
+    <div class="q-num"><div class="q-badge">2</div> Email <span class="q-req">*</span></div>
+    <h2 class="q-label">What's your <em>email address?</em></h2>
+    <p class="q-hint">I'll use this to reach out and follow up on your inquiry.</p>
+    <input class="q-input" id="i2" type="email" placeholder="you@example.com" autocomplete="off"/>
+    <div class="q-error" id="e2">Please enter a valid email address.</div>
+    <div class="q-actions">
+      <button class="btn-next" id="n2" disabled>OK &rarr;</button>
+      <button class="btn-back" id="b2">&larr; Back</button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+  </div>
+
+  <div class="slide" id="s4">
+    <div class="q-num"><div class="q-badge">3</div> Phone <span class="q-req">*</span></div>
+    <h2 class="q-label">Your <em>phone number</em> with country code.</h2>
+    <p class="q-hint">e.g. +234 801 234 5678 for WhatsApp or call follow-up.</p>
+    <input class="q-input" id="i3" type="tel" placeholder="+234 801 234 5678" autocomplete="off"/>
+    <div class="q-error" id="e3">Please enter your phone number with country code.</div>
+    <div class="q-actions">
+      <button class="btn-next" id="n3" disabled>OK &rarr;</button>
+      <button class="btn-back" id="b3">&larr; Back</button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+  </div>
+
+  <div class="slide" id="s5">
+    <div class="sec-header">
+      <div class="sec-eyebrow">Section 2 of 3</div>
+      <h2 class="sec-title">Your <em>Business</em></h2>
+      <p class="sec-sub">Tell me what you're building and where you need support.</p>
+      <button class="btn-start" id="btnSec2">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s6">
+    <div class="q-num"><div class="q-badge">4</div> Profile <span class="q-req">*</span></div>
+    <h2 class="q-label">Which best describes <em>you?</em></h2>
+    <p class="q-hint">Select the option that fits your current situation.</p>
+    <div class="choices" id="c4">
+      <div class="choice" data-val="Aspiring Entrepreneur - just starting out"><div class="choice-key">A</div><div class="choice-label">Aspiring Entrepreneur - just starting out</div></div>
+      <div class="choice" data-val="Startup Founder - early stage, building momentum"><div class="choice-key">B</div><div class="choice-label">Startup Founder - early stage, building momentum</div></div>
+      <div class="choice" data-val="Business Owner - established, looking to scale"><div class="choice-key">C</div><div class="choice-label">Business Owner - established, looking to scale</div></div>
+      <div class="choice" data-val="Organisation / Team - seeking leadership development"><div class="choice-key">D</div><div class="choice-label">Organisation / Team - seeking leadership development</div></div>
+    </div>
+    <div class="q-error" id="e4">Please select one option.</div>
+    <div class="q-actions">
+      <button class="btn-next" id="n4" disabled>OK &rarr;</button>
+      <button class="btn-back" id="b4">&larr; Back</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s7">
+    <div class="q-num"><div class="q-badge">5</div> Industry</div>
+    <h2 class="q-label">What <em>industry</em> are you in?</h2>
+    <p class="q-hint">Be as specific as you like - this helps me tailor my approach.</p>
+    <input class="q-input" id="i5" type="text" placeholder="e.g. Technology, Education, Finance, Creative..." autocomplete="off"/>
+    <div class="q-actions">
+      <button class="btn-next" id="n5">OK &rarr;</button>
+      <button class="btn-back" id="b5">&larr; Back</button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+  </div>
+
+  <div class="slide" id="s8">
+    <div class="q-num"><div class="q-badge">6</div> Challenge <span class="q-req">*</span></div>
+    <h2 class="q-label">What is your <em>biggest challenge</em> right now?</h2>
+    <p class="q-hint">Don't hold back. The more specific you are, the better I can help.</p>
+    <textarea class="q-textarea" id="i6" placeholder="Describe what's keeping you stuck or what you most want to improve..."></textarea>
+    <div class="q-error" id="e6">Please describe your challenge.</div>
+    <div class="q-actions">
+      <button class="btn-next" id="n6" disabled>OK &rarr;</button>
+      <button class="btn-back" id="b6">&larr; Back</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s9">
+    <div class="sec-header">
+      <div class="sec-eyebrow">Section 3 of 3</div>
+      <h2 class="sec-title">How I Can <em>Help</em></h2>
+      <p class="sec-sub">Let's find the right fit for what you need.</p>
+      <button class="btn-start" id="btnSec3">Continue &rarr;</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s10">
+    <div class="q-num"><div class="q-badge">7</div> Service <span class="q-req">*</span></div>
+    <h2 class="q-label">Which service are you <em>most interested in?</em></h2>
+    <p class="q-hint">What's most pressing for you right now?</p>
+    <div class="choices" id="c7">
+      <div class="choice" data-val="Strategic Business Consulting"><div class="choice-key">A</div><div class="choice-label">Strategic Business Consulting</div></div>
+      <div class="choice" data-val="Keynote Speaking / Event"><div class="choice-key">B</div><div class="choice-label">Keynote Speaking / Event</div></div>
+      <div class="choice" data-val="1-on-1 Business Coaching"><div class="choice-key">C</div><div class="choice-label">1-on-1 Business Coaching</div></div>
+      <div class="choice" data-val="Leadership Development / Workshop"><div class="choice-key">D</div><div class="choice-label">Leadership Development / Workshop</div></div>
+      <div class="choice" data-val="Brand and Marketing Strategy"><div class="choice-key">E</div><div class="choice-label">Brand and Marketing Strategy</div></div>
+    </div>
+    <div class="q-error" id="e7">Please select a service.</div>
+    <div class="q-actions">
+      <button class="btn-next" id="n7" disabled>OK &rarr;</button>
+      <button class="btn-back" id="b7">&larr; Back</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s11">
+    <div class="q-num"><div class="q-badge">8</div> Investment</div>
+    <h2 class="q-label">What's your <em>budget range</em> for this engagement?</h2>
+    <p class="q-hint">This helps me recommend the right package.</p>
+    <div class="chips" id="chips8">
+      <div class="chip" data-val="Below 5k">Below $5k</div>
+      <div class="chip" data-val="5k - 15k">$5k - $15k</div>
+      <div class="chip" data-val="15k - 50k">$15k - $50k</div>
+      <div class="chip" data-val="50k - 100k">$50k - $100k</div>
+      <div class="chip" data-val="Above 100k">Above $100k</div>
+      <div class="chip" data-val="Not sure yet">Not sure yet</div>
+    </div>
+    <div class="q-actions">
+      <button class="btn-next" id="n8">OK &rarr;</button>
+      <button class="btn-back" id="b8">&larr; Back</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s12">
+    <div class="q-num"><div class="q-badge">9</div> Timeline <span class="q-req">*</span></div>
+    <h2 class="q-label">When do you want to <em>get started?</em></h2>
+    <p class="q-hint">Even a rough idea helps me prioritise our conversation.</p>
+    <div class="choices" id="c9">
+      <div class="choice" data-val="As soon as possible"><div class="choice-key">A</div><div class="choice-label">As soon as possible - urgently needed</div></div>
+      <div class="choice" data-val="Within 1-4 weeks"><div class="choice-key">B</div><div class="choice-label">Within the next 1-4 weeks</div></div>
+      <div class="choice" data-val="In 1-3 months"><div class="choice-key">C</div><div class="choice-label">In 1-3 months</div></div>
+      <div class="choice" data-val="Just exploring"><div class="choice-key">D</div><div class="choice-label">Just exploring for now</div></div>
+    </div>
+    <div class="q-error" id="e9">Please select a timeline.</div>
+    <div class="q-actions">
+      <button class="btn-next" id="n9" disabled>OK &rarr;</button>
+      <button class="btn-back" id="b9">&larr; Back</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s13">
+    <div class="q-num"><div class="q-badge">10</div> Final Thoughts</div>
+    <h2 class="q-label">Anything else you'd like <em>Joel to know?</em></h2>
+    <p class="q-hint">This is your space - add context, questions, or anything that matters to you.</p>
+    <textarea class="q-textarea" id="i10" placeholder="Share anything that would help Joel understand your situation better..."></textarea>
+    <div class="q-actions">
+      <button class="btn-next" id="btnSubmit" style="padding:14px 40px;">Submit &#10022;</button>
+      <button class="btn-back" id="b10">&larr; Back</button>
+    </div>
+  </div>
+
+  <div class="slide" id="s14">
+    <div class="thankyou">
+      <span class="ty-icon">&#128024;</span>
+      <h2 class="ty-title">You're on<br><em>the right path.</em></h2>
+      <p class="ty-sub">Thank you for reaching out. Joel will review your submission and get back to you personally within 24-48 hours. In the meantime, keep building.</p>
+      <div class="ty-links">
+        <a href="https://jdbconsults.netlify.app/" class="ty-link" target="_blank">Visit Website</a>
+        <a href="https://www.instagram.com/joelthebeloved" class="ty-link" target="_blank">Follow on Instagram</a>
+        <a href="https://selar.com/m/JoelJakes" class="ty-link" target="_blank">Explore Resources</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="dots" id="dots"></div>
+<div class="kb-hint"><kbd>Enter</kbd> to continue</div>
+
+<script>
+var cur = 0;
+var total = 14;
+var ans = {};
+var anim = false;
+
+function g(id){ return document.getElementById(id); }
+function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+function isOk(idx){
+  if(idx===2) return g("i1").value.trim().length>1;
+  if(idx===3) return validEmail(g("i2").value.trim());
+  if(idx===4) return g("i3").value.trim().length>4;
+  if(idx===6) return !!ans[4];
+  if(idx===8) return g("i6").value.trim().length>5;
+  if(idx===10) return !!ans[7];
+  if(idx===12) return !!ans[9];
+  return true;
+}
+
+function show(idx){
+  for(var i=0;i<=total;i++){
+    var el=g("s"+i);
+    if(el){el.classList.remove("active","exit");}
+  }
+  var el=g("s"+idx);
+  if(el){
+    el.classList.add("active");
+    setTimeout(function(){
+      var inp=el.querySelector("input,textarea");
+      if(inp) inp.focus();
+    },300);
+  }
+  var pct=idx===0?0:Math.round((idx/total)*100);
+  g("progressBar").style.width=pct+"%";
+
+  var qMap={2:1,3:2,4:3,6:4,7:5,8:6,10:7,11:8,12:9,13:10};
+  var sc=g("stepCount");
+  if(qMap[idx]){sc.innerHTML="<span>"+qMap[idx]+"</span> / 10";}
+  else{sc.innerHTML="";}
+
+  var bgMap={0:"WORK",1:"WORK",2:"YOU",3:"YOU",4:"YOU",5:"YOU",6:"BUILD",7:"BUILD",8:"BUILD",9:"BUILD",10:"HELP",11:"HELP",12:"HELP",13:"HELP",14:"YES"};
+  g("stage").setAttribute("data-bg",bgMap[idx]||"");
+
+  var secs=[[0,1],[2,3,4],[5,6,7,8],[9,10,11,12,13],[14]];
+  var dotsEl=g("dots");
+  dotsEl.innerHTML="";
+  var si=-1;
+  secs.forEach(function(s,i){if(s.indexOf(idx)>=0) si=i;});
+  secs.forEach(function(s,i){
+    var d=document.createElement("div");
+    d.className="dot";
+    if(i===si) d.classList.add("active");
+    else if(i<si) d.classList.add("done");
+    dotsEl.appendChild(d);
+  });
+}
+
+function next(){
+  if(anim) return;
+  if(!isOk(cur)){
+    var errMap={2:"e1",3:"e2",4:"e3",6:"e4",8:"e6",10:"e7",12:"e9"};
+    if(errMap[cur]){var e=g(errMap[cur]);if(e) e.classList.add("show");}
+    return;
+  }
+  if(cur<total){
+    anim=true;
+    var el=g("s"+cur);
+    if(el) el.classList.add("exit");
+    setTimeout(function(){cur++;show(cur);anim=false;},350);
+  }
+}
+
+function back(){
+  if(anim||cur<=1) return;
+  anim=true;
+  var el=g("s"+cur);
+  if(el) el.classList.add("exit");
+  setTimeout(function(){cur--;show(cur);anim=false;},350);
+}
+
+function pickChoice(cid, ansKey, el){
+  var c=g(cid);
+  c.querySelectorAll(".choice").forEach(function(x){x.classList.remove("selected");});
+  el.classList.add("selected");
+  ans[ansKey]=el.getAttribute("data-val");
+  var nmap={4:"n4",7:"n7",9:"n9"};
+  if(nmap[ansKey]){var nb=g(nmap[ansKey]);if(nb) nb.disabled=false;}
+  var emap={4:"e4",7:"e7",9:"e9"};
+  if(emap[ansKey]){var eb=g(emap[ansKey]);if(eb) eb.classList.remove("show");}
+  setTimeout(next,400);
+}
+
+function submit(){
+  ans[10]=g("i10").value;
+  var sb=g("btnSubmit");
+  if(sb){sb.disabled=true;sb.textContent="Sending...";}
+
+  // Populate hidden Formspree form fields
+  g("fs-name").value     = ans[1]||"-";
+  g("fs-email").value    = ans[2]||"-";
+  g("fs-phone").value    = ans[3]||"-";
+  g("fs-profile").value  = ans[4]||"-";
+  g("fs-industry").value = ans[5]||"-";
+  g("fs-challenge").value= ans[6]||"-";
+  g("fs-service").value  = ans[7]||"-";
+  g("fs-budget").value   = ans[8]||"-";
+  g("fs-timeline").value = ans[9]||"-";
+  g("fs-notes").value    = ans[10]||"-";
+
+  // Show thank you screen immediately, then submit in background
+  anim=true;
+  var el=g("s"+cur);if(el) el.classList.add("exit");
+  setTimeout(function(){
+    cur=14;show(14);
+    g("progressBar").style.width="100%";
+    anim=false;
+    // Submit the native form
+    g("formspree-form").submit();
+  },350);
+}
+
+window.addEventListener("DOMContentLoaded",function(){
+  g("btnStart").addEventListener("click",function(){cur=1;show(1);});
+  g("btnSec1").addEventListener("click",next);
+  g("btnSec2").addEventListener("click",next);
+  g("btnSec3").addEventListener("click",next);
+
+  // Text inputs
+  g("i1").addEventListener("input",function(){g("n1").disabled=!isOk(2);if(isOk(2)) g("e1").classList.remove("show");});
+  g("i1").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();next();}});
+  g("n1").addEventListener("click",next);
+
+  g("i2").addEventListener("input",function(){g("n2").disabled=!isOk(3);if(isOk(3)) g("e2").classList.remove("show");});
+  g("i2").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();next();}});
+  g("n2").addEventListener("click",next);
+  g("b2").addEventListener("click",back);
+
+  g("i3").addEventListener("input",function(){g("n3").disabled=!isOk(4);if(isOk(4)) g("e3").classList.remove("show");});
+  g("i3").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();next();}});
+  g("n3").addEventListener("click",next);
+  g("b3").addEventListener("click",back);
+
+  // Choices Q4
+  g("c4").querySelectorAll(".choice").forEach(function(el){
+    el.addEventListener("click",function(){pickChoice("c4",4,el);});
+  });
+  g("n4").addEventListener("click",next);
+  g("b4").addEventListener("click",back);
+
+  // Industry
+  g("i5").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();ans[5]=g("i5").value;next();}});
+  g("n5").addEventListener("click",function(){ans[5]=g("i5").value;next();});
+  g("b5").addEventListener("click",back);
+
+  // Challenge
+  g("i6").addEventListener("input",function(){g("n6").disabled=!isOk(8);if(isOk(8)) g("e6").classList.remove("show");});
+  g("n6").addEventListener("click",next);
+  g("b6").addEventListener("click",back);
+
+  // Choices Q7
+  g("c7").querySelectorAll(".choice").forEach(function(el){
+    el.addEventListener("click",function(){pickChoice("c7",7,el);});
+  });
+  g("n7").addEventListener("click",next);
+  g("b7").addEventListener("click",back);
+
+  // Budget chips
+  g("chips8").querySelectorAll(".chip").forEach(function(chip){
+    chip.addEventListener("click",function(){
+      g("chips8").querySelectorAll(".chip").forEach(function(c){c.classList.remove("selected");});
+      chip.classList.add("selected");
+      ans[8]=chip.getAttribute("data-val");
+    });
+  });
+  g("n8").addEventListener("click",next);
+  g("b8").addEventListener("click",back);
+
+  // Timeline
+  g("c9").querySelectorAll(".choice").forEach(function(el){
+    el.addEventListener("click",function(){pickChoice("c9",9,el);});
+  });
+  g("n9").addEventListener("click",next);
+  g("b9").addEventListener("click",back);
+
+  // Submit
+  g("btnSubmit").addEventListener("click",submit);
+  g("b10").addEventListener("click",back);
+
+  // Keyboard
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Enter"&&!e.shiftKey&&document.activeElement.tagName!=="TEXTAREA"){
+      e.preventDefault();
+      if(cur===0){cur=1;show(1);}
+      else if(cur===13){submit();}
+      else{next();}
+    }
+    var km={a:0,b:1,c:2,d:3,e:4};
+    var cmap={6:"c4",10:"c7",12:"c9"};
+    if(e.key.toLowerCase() in km && cmap[cur] && document.activeElement.tagName!=="INPUT"){
+      var cont=g(cmap[cur]);
+      if(cont){var ch=cont.querySelectorAll(".choice");var i=km[e.key.toLowerCase()];if(ch[i]) ch[i].click();}
+    }
+  });
+
+  show(0);
+});
+</script>
+</body>
+</html>

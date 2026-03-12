@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Joel The Beloved — Osamudiamen Joel Osagie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #7a6330;
+    --ink: #0D0D0D;
+    --deep: #111111;
+    --surface: #161616;
+    --surface2: #1E1D1B;
+    --text: #F0EDE6;
+    --muted: #8A8578;
+    --accent: #C9A84C;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.95), transparent);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 40px; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 60px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-headline strong {
+    font-weight: 700;
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 420px;
+    margin-top: 28px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-ghost {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text);
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 4px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image-wrap {
+    position: absolute;
+    inset: 0;
+    background: var(--surface);
+  }
+  .hero-image-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--ink) 0%, transparent 30%),
+                linear-gradient(to top, var(--ink) 0%, transparent 25%);
+    z-index: 1;
+  }
+  .hero-placeholder {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+    filter: grayscale(20%);
+  }
+
+  /* Decorative text in hero-right */
+  .hero-badge {
+    position: absolute;
+    bottom: 60px; left: 40px;
+    z-index: 3;
+    border: 1px solid var(--gold-dim);
+    padding: 20px 28px;
+    background: rgba(13,13,13,0.7);
+    backdrop-filter: blur(10px);
+  }
+  .hero-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-badge-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px; left: 60px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-scroll-line {
+    width: 40px; height: 1px;
+    background: var(--gold-dim);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--gold);
+    animation: scrollLine 2s infinite;
+  }
+  @keyframes scrollLine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  .hero-scroll-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    background: var(--surface);
+    overflow: hidden;
+    padding: 16px 0;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--muted);
+    padding: 0 48px;
+    white-space: nowrap;
+  }
+  .marquee-item span {
+    color: var(--gold);
+    margin-right: 48px;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SECTION BASE */
+  section { padding: 120px 60px; }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-title strong { font-weight: 700; }
+
+  /* ABOUT */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: var(--surface);
+  }
+
+  .about-image-col {
+    position: relative;
+  }
+  .about-img-box {
+    width: 100%; aspect-ratio: 3/4;
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-img-box::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 60%; height: 60%;
+    border: 1px solid var(--gold-dim);
+    z-index: -1;
+  }
+  .about-quote-pull {
+    position: absolute;
+    bottom: -30px; left: -30px;
+    background: var(--ink);
+    border-left: 3px solid var(--gold);
+    padding: 24px 28px;
+    max-width: 320px;
+  }
+  .about-quote-pull p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .about-text-col {}
+  .about-body {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.9;
+    margin-top: 32px;
+  }
+  .about-body p + p { margin-top: 20px; }
+  .about-body strong { color: var(--text); font-weight: 500; }
+
+  .about-tags {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 40px;
+  }
+  .about-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--gold-dim);
+    color: var(--muted);
+    padding: 8px 18px;
+  }
+
+  /* SERVICES */
+  #services { background: var(--ink); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+
+  .service-card {
+    background: var(--surface);
+    padding: 48px 40px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: var(--surface2); }
+
+  .service-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #1f1e1b;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .service-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 16px; }
+
+  /* ELEPHANT PLATFORM */
+  #elephant {
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+  #elephant::before {
+    content: 'THE BUSINESS ELEPHANT';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12vw;
+    font-weight: 700;
+    color: rgba(201,168,76,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+  }
+
+  .elephant-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .elephant-text .section-title { margin-top: 24px; }
+  .elephant-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-top: 28px;
+    max-width: 520px;
+  }
+  .elephant-pillars {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .elephant-pillar {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #222;
+  }
+  .pillar-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+  .pillar-text strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .pillar-text p { font-size: 0.85rem; color: var(--muted); }
+
+  .elephant-visual {
+    position: relative;
+  }
+  .elephant-card-big {
+    background: var(--ink);
+    border: 1px solid #2a2a2a;
+    padding: 48px;
+    position: relative;
+  }
+  .elephant-card-big::after {
+    content: '';
+    position: absolute;
+    top: 16px; right: -16px;
+    bottom: -16px; left: 16px;
+    border: 1px solid var(--gold-dim);
+    z-index: -1;
+  }
+  .elephant-icon {
+    font-size: 3rem;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .elephant-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .elephant-card-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .elephant-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 4px;
+    transition: gap 0.3s;
+  }
+  .elephant-cta:hover { gap: 20px; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--ink); }
+
+  .testimonials-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 64px;
+    align-items: end;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .testi-card {
+    background: var(--surface);
+    padding: 48px 40px;
+    position: relative;
+  }
+  .testi-quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    line-height: 0.5;
+    margin-bottom: 24px;
+    opacity: 0.4;
+  }
+  .testi-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .testi-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .testi-role {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .testi-card.featured {
+    background: var(--gold);
+  }
+  .testi-card.featured .testi-quote-mark,
+  .testi-card.featured .testi-text { color: var(--ink); opacity: 1; }
+  .testi-card.featured .testi-name { color: var(--ink); }
+  .testi-card.featured .testi-role { color: rgba(13,13,13,0.65); }
+
+  /* SPEAKING / CRED */
+  #credentials {
+    background: var(--surface);
+    overflow: hidden;
+    position: relative;
+  }
+  .cred-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+  .cred-item {
+    padding: 40px;
+    border: 1px solid #1f1f1f;
+    transition: border-color 0.3s;
+  }
+  .cred-item:hover { border-color: var(--gold-dim); }
+  .cred-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .cred-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .cred-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+  /* PRODUCTS */
+  #products { background: var(--ink); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 64px;
+  }
+  .product-card {
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .product-card:hover { transform: translateY(-6px); }
+  .product-thumb {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .product-body { padding: 28px; }
+  .product-type {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .product-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .product-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .product-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 8px 20px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .product-btn:hover { background: var(--gold-light); }
+
+  /* CTA */
+  #cta {
+    background: var(--gold);
+    text-align: center;
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: 'UNCOMMON';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20vw;
+    font-weight: 700;
+    color: rgba(13,13,13,0.06);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cta-inner { position: relative; z-index: 2; }
+  .cta-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(13,13,13,0.55);
+    margin-bottom: 24px;
+  }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+  .cta-title strong { font-weight: 700; display: block; }
+  .cta-desc {
+    font-size: 1rem;
+    color: rgba(13,13,13,0.65);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+  }
+  .btn-dark {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--ink);
+    padding: 18px 44px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+  .btn-dark:hover { background: #222; transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid #1a1a1a;
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 280px;
+  }
+  .footer-social {
+    display: flex; gap: 16px;
+    margin-top: 28px;
+  }
+  .footer-social a {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-social a:hover { color: var(--gold); }
+  .footer-col-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-links a {
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--text); }
+  .footer-bottom {
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #1a1a1a;
+  }
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 24px 32px; }
+    .nav-links { display: none; }
+    section { padding: 80px 32px; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 32px 80px; }
+    #about { grid-template-columns: 1fr; }
+    .about-image-col { display: none; }
+    .services-grid, .cred-grid, .products-grid { grid-template-columns: 1fr; }
+    .testimonials-intro, .elephant-inner { grid-template-columns: 1fr; gap: 40px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { padding: 20px 32px; flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Joel The Beloved</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#elephant">The Business Elephant</a></li>
+    <li><a href="#products">Resources</a></li>
+  </ul>
+  <a href="joel-intake-form.html" class="nav-cta">Work With Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Joel The Beloved</div>
+    <h1 class="hero-headline">
+      <em>Strategy.</em>
+      <strong>Wisdom.</strong>
+      Impact.
+    </h1>
+    <p class="hero-sub">
+      Business consultant. Speaker. System builder. Mind sculptor.
+      Where unconventional thinking meets actionable clarity — and ordinary becomes uncommon.
+    </p>
+    <div class="hero-actions">
+      <a href="joel-intake-form.html" class="btn-primary">Work With Me</a>
+      <a href="#about" class="btn-ghost">Discover More →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-wrap">
+      <img src="https://res.cloudinary.com/dxme96ojy/image/upload/v1773233501/copy_of_photo_2024-05-23_22-15-28_a6qulv_5de89e.jpg" alt="Joel The Beloved — Osamudiamen Joel Osagie" class="hero-placeholder" />
+    </div>
+    <div class="hero-badge" style="position:absolute; bottom:60px; right:40px; z-index:3; border:1px solid var(--gold-dim); padding:20px 28px; background:rgba(13,13,13,0.85); backdrop-filter:blur(10px);">
+      <div class="hero-badge-num">4+</div>
+      <div class="hero-badge-label">Years of Impact</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span>✦</span> Business Consulting</span>
+    <span class="marquee-item"><span>✦</span> Keynote Speaking</span>
+    <span class="marquee-item"><span>✦</span> Leadership Development</span>
+    <span class="marquee-item"><span>✦</span> The Business Elephant</span>
+    <span class="marquee-item"><span>✦</span> System Building</span>
+    <span class="marquee-item"><span>✦</span> Mind Sculpting</span>
+    <span class="marquee-item"><span>✦</span> African Excellence</span>
+    <span class="marquee-item"><span>✦</span> Business Consulting</span>
+    <span class="marquee-item"><span>✦</span> Keynote Speaking</span>
+    <span class="marquee-item"><span>✦</span> Leadership Development</span>
+    <span class="marquee-item"><span>✦</span> The Business Elephant</span>
+    <span class="marquee-item"><span>✦</span> System Building</span>
+    <span class="marquee-item"><span>✦</span> Mind Sculpting</span>
+    <span class="marquee-item"><span>✦</span> African Excellence</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image-col fade-up">
+    <div class="about-img-box">
+      <img src="https://res.cloudinary.com/dxme96ojy/image/upload/v1773233626/copy_of_photo_2024-05-08_08-58-36_gffce3_06ebff.jpg" alt="Joel The Beloved" style="width:100%; height:100%; object-fit:cover; object-position: center top; display:block;" />
+    </div>
+    <div class="about-quote-pull">
+      <p>"My work sits at the intersection of strategy and wisdom."</p>
+    </div>
+  </div>
+  <div class="about-text-col fade-up">
+    <div class="section-label">About</div>
+    <h2 class="section-title">
+      Not just another voice.<br>
+      <em>A rare blend.</em>
+    </h2>
+    <div class="about-body">
+      <p>Osamudiamen Joel Osagie — aka <strong>Joel The Beloved</strong> — is a business consultant, public speaker, system builder, and mind sculptor. He operates at the intersection of <strong>strategy and wisdom</strong>, where ancient thinking meets modern business realities.</p>
+      <p>From captivating audiences at <strong>Magna Redditus 1.0</strong> alongside industry titans, to winning <strong>The Exceptional Educators Award</strong>, to consulting for brands across multiple industries — Joel moves with intentionality and depth.</p>
+      <p>Behind the scenes, he is a businesss strategist, a leadership developer, a solutions architect, and a man on a mission to <strong>elevate others</strong>. Every story he tells, every system he builds, carries the weight of unconventional thinking and actionable clarity.</p>
+    </div>
+    <div class="about-tags">
+      <span class="about-tag">Consultant</span>
+      <span class="about-tag">Speaker</span>
+      <span class="about-tag">System Builder</span>
+      <span class="about-tag">Educator</span>
+      <span class="about-tag">Leader Developer</span>
+      <span class="about-tag">Business Strategist</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">Services</div>
+  <h2 class="section-title">What I <em>do</em> for you.</h2>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-number">01</div>
+      <div class="service-title">Strategic Business Consulting</div>
+      <p class="service-desc">Comprehensive consulting for organisations on the brink of transformation. I help you uncover what's keeping your business stagnant and implement strategies that drive sustainable, scalable growth.</p>
+      <a href="joel-intake-form.html" class="service-link">Inquire →</a>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-number">02</div>
+      <div class="service-title">Keynote Speaking</div>
+      <p class="service-desc">Captivating keynotes that transcend conventional boundaries. I unleash the power of storytelling to equip your audience with actionable strategies and a mindset built for uncommon results.</p>
+      <a href="joel-intake-form.html" class="service-link">Book Me →</a>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-number">03</div>
+      <div class="service-title">Leadership Development</div>
+      <p class="service-desc">Tailor-made leadership programs aligned with your organisational goals. From team workshops to C-suite executive intensives — I cultivate visionary leaders who build cultures of continuous growth.</p>
+      <a href="joel-intake-form.html" class="service-link">Explore →</a>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-number">04</div>
+      <div class="service-title">1-on-1 Coaching</div>
+      <p class="service-desc">Personalised coaching for professionals seeking individualised growth. Holistic development plans focused on career ambitions, leadership mastery, and building the business version of yourself.</p>
+      <a href="joel-intake-form.html" class="service-link">Get Started →</a>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-number">05</div>
+      <div class="service-title">Workshops & Training</div>
+      <p class="service-desc">Interactive, immersive workshops that foster team collaboration, innovation, and skill enhancement. I don't just train teams — I transform how they think, work, and lead together.</p>
+      <a href="joel-intake-form.html" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-number">06</div>
+      <div class="service-title">Brand & Marketing Strategy</div>
+      <p class="service-desc">As a seasoned CMO, I help brands craft strategies that don't just attract customers — they build loyal communities. From customer acquisition to profitability, I diagnose and deliver.</p>
+      <a href="joel-intake-form.html" class="service-link">Inquire →</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE BUSINESS ELEPHANT -->
+<section id="elephant">
+  <div class="elephant-inner">
+    <div class="elephant-text fade-up">
+      <div class="section-label">The Platform</div>
+      <h2 class="section-title">
+        The Business<br>
+        <em>Elephant.</em>
+      </h2>
+      <p class="elephant-desc">
+        A platform where entrepreneurs meet the uncommon truths that make businesses thrive. The Business Elephant exists to help you build with intentionality, scale with clarity, and lead with purpose.
+      </p>
+      <div class="elephant-pillars">
+        <div class="elephant-pillar">
+          <div class="pillar-dot"></div>
+          <div class="pillar-text">
+            <strong>Uncommon Thinking</strong>
+            <p>Frameworks and insights that challenge conventional business wisdom and open new paths to growth.</p>
+          </div>
+        </div>
+        <div class="elephant-pillar">
+          <div class="pillar-dot"></div>
+          <div class="pillar-text">
+            <strong>Actionable Clarity</strong>
+            <p>Every lesson, every resource is built to be applied — not just consumed. Real tools for real results.</p>
+          </div>
+        </div>
+        <div class="elephant-pillar">
+          <div class="pillar-dot"></div>
+          <div class="pillar-text">
+            <strong>Ancient Wisdom, Modern Context</strong>
+            <p>Drawing from deep wells — ministry, leadership theory, lived experience — to shape how you build.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="elephant-visual fade-up">
+      <div class="elephant-card-big">
+        <span class="elephant-icon">🐘</span>
+        <div class="elephant-card-title">The Business Elephant</div>
+        <p class="elephant-card-desc">
+          Elephants never forget. Neither should your business strategy. The Business Elephant is where deep memory, community intelligence, and strategic strength converge — for entrepreneurs who are serious about building something that lasts.
+        </p>
+        <a href="#products" class="elephant-cta">Explore Resources →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-intro">
+    <div>
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title">What they <em>say.</em></h2>
+    </div>
+    <p style="color:var(--muted); font-size:0.95rem; line-height:1.9;">
+      Joel doesn't just deliver results — he delivers transformation. Here's what some of the people and organisations he's worked with have to say.
+    </p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card featured fade-up">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">His impact on my business was so great, it brought about progress and deepened convictions. He helped increase the scalability of my business through consultations. He's DEFINITELY worth your time and every dime he charges.</p>
+      <div class="testi-name">Henry Attah</div>
+      <div class="testi-role">CEO, LifeGate Global</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">The leadership training session was very impactful. A lot of our members and staff were enlightened. He helped in cultivating the right mindset for the achievement of our goals. He knows what he's doing and is very flexible.</p>
+      <div class="testi-name">De Cre.Ace Art Club</div>
+      <div class="testi-role">Creative Organisation</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">He showed me the ropes on how to go about starting my tech company. He guided me through a difficult business partner situation too. If you're having second thoughts — don't. He's well grounded and always delivers beyond expectations.</p>
+      <div class="testi-name">Stalone Tech</div>
+      <div class="testi-role">Tech Startup</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">He helped me with tailor-made customer acquisition strategies to grow my customer base, as well as retention strategies that contributed massively to the overall growth and profitability of my business.</p>
+      <div class="testi-name">Desmond C. Nwakwo</div>
+      <div class="testi-role">Founder, Bethelegend Global</div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="section-label">Track Record</div>
+  <h2 class="section-title">Numbers that <em>speak.</em></h2>
+  <div class="cred-grid">
+    <div class="cred-item fade-up">
+      <div class="cred-num">4+</div>
+      <div class="cred-label">Years of Impact</div>
+      <p class="cred-desc">Over four years of impactful speaking, consulting, and leadership development across multiple industries.</p>
+    </div>
+    <div class="cred-item fade-up">
+      <div class="cred-num">100s</div>
+      <div class="cred-label">Audiences Reached</div>
+      <p class="cred-desc">From Atlassian University of Benin to Magna Redditus 1.0 — hundreds of audience members transformed.</p>
+    </div>
+    <div class="cred-item fade-up">
+      <div class="cred-num">1</div>
+      <div class="cred-label">Exceptional Educators Award</div>
+      <p class="cred-desc">Recognised for outstanding contributions to education and leadership development.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-label">Resources</div>
+  <h2 class="section-title">Tools to <em>build</em> with.</h2>
+  <div class="products-grid">
+    <div class="product-card fade-up">
+      <div class="product-thumb">📖</div>
+      <div class="product-body">
+        <div class="product-type">Digital Resource</div>
+        <div class="product-name">The Uncommon Business Blueprint</div>
+        <p class="product-desc">The frameworks, systems, and strategies Joel uses to help brands scale — distilled into a powerful actionable guide.</p>
+        <div class="product-footer">
+          <div class="product-price">On Selar</div>
+          <a href="https://selar.com/m/JoelJakes" class="product-btn">Get It →</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-thumb">🎙️</div>
+      <div class="product-body">
+        <div class="product-type">Newsletter</div>
+        <div class="product-name">Letters From The Jew</div>
+        <p class="product-desc">Deep letters on entrepreneurship, bootstrapping, brand building, and the mindset shifts that separate ordinary from uncommon.</p>
+        <div class="product-footer">
+          <div class="product-price">Free</div>
+          <a href="https://lettersfromthejew.substack.com/" target="_blank" class="product-btn">Subscribe →</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-thumb">🐘</div>
+      <div class="product-body">
+        <div class="product-type">Community + Mentorship</div>
+        <div class="product-name">The Fort Club</div>
+        <p class="product-desc">Joel's mentorship community for aspiring entrepreneurs and emerging leaders. A space to grow, be challenged, and be surrounded by serious minds.</p>
+        <div class="product-footer">
+          <div class="product-price">Apply</div>
+          <a href="https://t.me/+gTFnHB3ms5JlMzg8" target="_blank" class="product-btn">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Ready to Build?</div>
+    <h2 class="cta-title">
+      If you're looking<br>
+      <strong>for the usual,</strong><br>
+      you won't find it here.
+    </h2>
+    <p class="cta-desc">
+      But if you're ready to build something uncommon — to think differently, scale intentionally, and lead with purpose — let's talk.
+    </p>
+    <a href="joel-intake-form.html" class="btn-dark">Work With Joel →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo">Joel The Beloved</div>
+    <p class="footer-tagline">Business consultant. Speaker. System builder. Mind sculptor. Building uncommon things with uncommon people.</p>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/joelthebeloved" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/joelthebeloved" target="_blank">Facebook</a>
+      <a href="https://www.x.com/joelthebeloved" target="_blank">X</a>
+    </div>
+  </div>
+  <div>
+    <div class="footer-col-title">Navigate</div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#elephant">The Business Elephant</a></li>
+      <li><a href="#credentials">Track Record</a></li>
+      <li><a href="#products">Resources</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Work With Me</div>
+    <ul class="footer-links">
+      <li><a href="joel-intake-form.html">Hire Me</a></li>
+      <li><a href="https://selar.com/m/JoelJakes">Shop Resources</a></li>
+      <li><a href="joel-intake-form.html">Speaking Inquiry</a></li>
+      <li><a href="joel-intake-form.html">Consulting</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2025 Osamudiamen Joel Osagie. All rights reserved.</span>
+  <span class="footer-copy" style="color:var(--gold-dim);">Joel The Beloved · The Business Elephant</span>
+</div>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 5 + 'px';
+    cursor.style.top = my - 5 + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 18 + 'px';
+    ring.style.top = ry - 18 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Intersection Observer for fade-up
+  const faders = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100 * (Array.from(faders).indexOf(entry.target) % 3));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  faders.forEach(f => observer.observe(f));
+
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      nav.style.background = 'rgba(13,13,13,0.97)';
+      nav.style.backdropFilter = 'blur(20px)';
+    } else {
+      nav.style.background = 'linear-gradient(to bottom, rgba(13,13,13,0.95), transparent)';
+      nav.style.backdropFilter = 'none';
+    }
+  });
+</script>
+</body>
+</html>
