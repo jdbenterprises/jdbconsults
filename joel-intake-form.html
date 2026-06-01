@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Work With Joel - Joel The Beloved</title>
+<title>Work With Joel - JDB Consults</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
 :root{--gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:#7a6330;--ink:#0D0D0D;--surface:#161616;--surface2:#1E1D1B;--text:#F0EDE6;--muted:#8A8578;--border:#2a2a2a;}
@@ -92,23 +92,26 @@ body{background:var(--ink);color:var(--text);font-family:"DM Sans",sans-serif;fo
 <body>
 
 <!-- Netlify Form - detected at deploy, submitted via fetch -->
-<form id="netlify-form" name="joel-intake" netlify data-netlify="true" style="display:none;">
+<!-- Netlify form detection — required for Netlify Forms to work -->
+<form id="netlify-form" name="joel-intake" action="/" method="POST"
+      data-netlify="true" netlify-honeypot="bot-field" style="display:none;">
   <input type="hidden" name="form-name" value="joel-intake"/>
-  <input name="Name / Organisation" id="fs-name"/>
-  <input name="email" id="fs-email"/>
-  <input name="Phone" id="fs-phone"/>
-  <input name="Business Profile" id="fs-profile"/>
-  <input name="Industry" id="fs-industry"/>
-  <input name="Biggest Challenge" id="fs-challenge"/>
-  <input name="Service Interested In" id="fs-service"/>
-  <input name="Budget Range" id="fs-budget"/>
-  <input name="Timeline" id="fs-timeline"/>
-  <input name="Additional Notes" id="fs-notes"/>
+  <input type="hidden" name="bot-field"/>
+  <input type="hidden" name="Name / Organisation" id="fs-name"/>
+  <input type="hidden" name="email" id="fs-email"/>
+  <input type="hidden" name="Phone" id="fs-phone"/>
+  <input type="hidden" name="Business Profile" id="fs-profile"/>
+  <input type="hidden" name="Industry" id="fs-industry"/>
+  <input type="hidden" name="Biggest Challenge" id="fs-challenge"/>
+  <input type="hidden" name="Service Interested In" id="fs-service"/>
+  <input type="hidden" name="Budget Range" id="fs-budget"/>
+  <input type="hidden" name="Timeline" id="fs-timeline"/>
+  <input type="hidden" name="Additional Notes" id="fs-notes"/>
 </form>
 
 <div class="progress-bar" id="progressBar" style="width:0%"></div>
 <div class="top-nav">
-  <a href="https://jdbconsults.netlify.app/" class="nav-brand">Joel The Beloved</a>
+  <a href="https://osamudiamenosagie.carrd.co/" class="nav-brand">Joel The Beloved</a>
   <div class="nav-step-count" id="stepCount"></div>
 </div>
 <div class="stage" id="stage" data-bg="WORK">
@@ -119,7 +122,9 @@ body{background:var(--ink);color:var(--text);font-family:"DM Sans",sans-serif;fo
       <h1 class="welcome-title">Work With<br><em>Osamudiamen</em><br><strong>Joel Osagie</strong></h1>
       <p class="welcome-sub">Unleashing Potential, Driving Success. Tell me about you and let us build something uncommon together.</p>
       <div class="welcome-meta">
+        <div class="welcome-meta-item">3 sections</div>
         <div class="welcome-meta-item">About 3 minutes</div>
+        <div class="welcome-meta-item">No pressure</div>
       </div>
       <button class="btn-start" id="btnStart">Let's Begin &rarr;</button>
     </div>
@@ -252,13 +257,13 @@ body{background:var(--ink);color:var(--text);font-family:"DM Sans",sans-serif;fo
   <div class="slide" id="s11">
     <div class="q-num"><div class="q-badge">8</div> Investment</div>
     <h2 class="q-label">What's your <em>budget range</em> for this engagement?</h2>
-    <p class="q-hint">This helps me recommend the right package.</p>
+    <p class="q-hint">This helps me recommend the right package. No judgement - just clarity.</p>
     <div class="chips" id="chips8">
-      <div class="chip" data-val="Below 5k">Below $5k</div>
-      <div class="chip" data-val="5k - 15k">$5k - $15k</div>
-      <div class="chip" data-val="15k - 50k">$15k - $50k</div>
-      <div class="chip" data-val="50k - 100k">$50k - $100k</div>
-      <div class="chip" data-val="Above 100k">Above $100k</div>
+      <div class="chip" data-val="Below 50k">Below N50k</div>
+      <div class="chip" data-val="50k - 150k">N50k - N150k</div>
+      <div class="chip" data-val="150k - 500k">N150k - N500k</div>
+      <div class="chip" data-val="500k - 1M">N500k - N1M</div>
+      <div class="chip" data-val="Above 1M">Above N1M</div>
       <div class="chip" data-val="Not sure yet">Not sure yet</div>
     </div>
     <div class="q-actions">
@@ -301,7 +306,7 @@ body{background:var(--ink);color:var(--text);font-family:"DM Sans",sans-serif;fo
       <h2 class="ty-title">You're on<br><em>the right path.</em></h2>
       <p class="ty-sub">Thank you for reaching out. Joel will review your submission and get back to you personally within 24-48 hours. In the meantime, keep building.</p>
       <div class="ty-links">
-        <a href="https://jdbconsults.netlify.app/" class="ty-link" target="_blank">Visit Website</a>
+        <a href="https://osamudiamenosagie.carrd.co/" class="ty-link" target="_blank">Visit Website</a>
         <a href="https://www.instagram.com/joelthebeloved" class="ty-link" target="_blank">Follow on Instagram</a>
         <a href="https://selar.com/m/JoelJakes" class="ty-link" target="_blank">Explore Resources</a>
       </div>
@@ -405,33 +410,51 @@ function pickChoice(cid, ansKey, el){
   setTimeout(next,400);
 }
 
+function encode(data){
+  return Object.keys(data)
+    .map(function(key){ return encodeURIComponent(key)+"="+encodeURIComponent(data[key]); })
+    .join("&");
+}
+
 function submit(){
-  ans[10]=g("i10").value;
-  var sb=g("btnSubmit");
-  if(sb){sb.disabled=true;sb.textContent="Sending...";}
+  ans[10] = g("i10").value;
+  var sb = g("btnSubmit");
+  if(sb){ sb.disabled=true; sb.textContent="Sending..."; }
 
-  // Populate hidden Formspree form fields
-  g("fs-name").value     = ans[1]||"-";
-  g("fs-email").value    = ans[2]||"-";
-  g("fs-phone").value    = ans[3]||"-";
-  g("fs-profile").value  = ans[4]||"-";
-  g("fs-industry").value = ans[5]||"-";
-  g("fs-challenge").value= ans[6]||"-";
-  g("fs-service").value  = ans[7]||"-";
-  g("fs-budget").value   = ans[8]||"-";
-  g("fs-timeline").value = ans[9]||"-";
-  g("fs-notes").value    = ans[10]||"-";
+  var payload = {
+    "form-name":            "joel-intake",
+    "Name / Organisation":  ans[1] || "-",
+    "email":                ans[2] || "-",
+    "Phone":                ans[3] || "-",
+    "Business Profile":     ans[4] || "-",
+    "Industry":             ans[5] || "-",
+    "Biggest Challenge":    ans[6] || "-",
+    "Service Interested In":ans[7] || "-",
+    "Budget Range":         ans[8] || "-",
+    "Timeline":             ans[9] || "-",
+    "Additional Notes":     ans[10]|| "-"
+  };
 
-  // Show thank you screen immediately, then submit in background
-  anim=true;
-  var el=g("s"+cur);if(el) el.classList.add("exit");
-  setTimeout(function(){
-    cur=14;show(14);
-    g("progressBar").style.width="100%";
-    anim=false;
-    // Submit the native form
-    g("formspree-form").submit();
-  },350);
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: encode(payload)
+  })
+  .then(function(){
+    // Success — show thank you screen
+    anim=true;
+    var el=g("s"+cur); if(el) el.classList.add("exit");
+    setTimeout(function(){
+      cur=14; show(14);
+      g("progressBar").style.width="100%";
+      anim=false;
+    }, 350);
+  })
+  .catch(function(err){
+    if(sb){ sb.disabled=false; sb.textContent="Submit ✶"; }
+    alert("Something went wrong. Please check your connection and try again.");
+    console.error(err);
+  });
 }
 
 window.addEventListener("DOMContentLoaded",function(){
