@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Work With Joel - JDB Consults</title>
+<title>Work With Joel - Joel The Beloved</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
 :root{--gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:#7a6330;--ink:#0D0D0D;--surface:#161616;--surface2:#1E1D1B;--text:#F0EDE6;--muted:#8A8578;--border:#2a2a2a;}
@@ -259,11 +259,11 @@ body{background:var(--ink);color:var(--text);font-family:"DM Sans",sans-serif;fo
     <h2 class="q-label">What's your <em>budget range</em> for this engagement?</h2>
     <p class="q-hint">This helps me recommend the right package. No judgement - just clarity.</p>
     <div class="chips" id="chips8">
-      <div class="chip" data-val="Below 50k">Below $5k</div>
-      <div class="chip" data-val="50k - 150k">$5k - $15k</div>
-      <div class="chip" data-val="150k - 500k">$15k - $50k</div>
-      <div class="chip" data-val="500k - 1M">$50k - $100k</div>
-      <div class="chip" data-val="Above 1M">Above $100k</div>
+      <div class="chip" data-val="Below 5k">Below $5k</div>
+      <div class="chip" data-val="5k - 15k">$5k - $15k</div>
+      <div class="chip" data-val="15k - 50k">$15k - $50k</div>
+      <div class="chip" data-val="50k - 100k">$50k - $100k</div>
+      <div class="chip" data-val="Above 100k">Above $100k</div>
       <div class="chip" data-val="Not sure yet">Not sure yet</div>
     </div>
     <div class="q-actions">
@@ -306,7 +306,7 @@ body{background:var(--ink);color:var(--text);font-family:"DM Sans",sans-serif;fo
       <h2 class="ty-title">You're on<br><em>the right path.</em></h2>
       <p class="ty-sub">Thank you for reaching out. Joel will review your submission and get back to you personally within 24-48 hours. In the meantime, keep building.</p>
       <div class="ty-links">
-        <a href="https://osamudiamenosagie.carrd.co/" class="ty-link" target="_blank">Visit Website</a>
+        <a href="https://jdbconsults.netlify.app" class="ty-link" target="_blank">Visit Website</a>
         <a href="https://www.instagram.com/joelthebeloved" class="ty-link" target="_blank">Follow on Instagram</a>
         <a href="https://selar.com/m/JoelJakes" class="ty-link" target="_blank">Explore Resources</a>
       </div>
@@ -465,17 +465,17 @@ window.addEventListener("DOMContentLoaded",function(){
 
   // Text inputs
   g("i1").addEventListener("input",function(){g("n1").disabled=!isOk(2);if(isOk(2)) g("e1").classList.remove("show");});
-  g("i1").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();next();}});
-  g("n1").addEventListener("click",next);
+  g("i1").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();ans[1]=g("i1").value;next();}});
+  g("n1").addEventListener("click",function(){ans[1]=g("i1").value;next();});
 
   g("i2").addEventListener("input",function(){g("n2").disabled=!isOk(3);if(isOk(3)) g("e2").classList.remove("show");});
-  g("i2").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();next();}});
-  g("n2").addEventListener("click",next);
+  g("i2").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();ans[2]=g("i2").value;next();}});
+  g("n2").addEventListener("click",function(){ans[2]=g("i2").value;next();});
   g("b2").addEventListener("click",back);
 
   g("i3").addEventListener("input",function(){g("n3").disabled=!isOk(4);if(isOk(4)) g("e3").classList.remove("show");});
-  g("i3").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();next();}});
-  g("n3").addEventListener("click",next);
+  g("i3").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();ans[3]=g("i3").value;next();}});
+  g("n3").addEventListener("click",function(){ans[3]=g("i3").value;next();});
   g("b3").addEventListener("click",back);
 
   // Choices Q4
@@ -492,7 +492,7 @@ window.addEventListener("DOMContentLoaded",function(){
 
   // Challenge
   g("i6").addEventListener("input",function(){g("n6").disabled=!isOk(8);if(isOk(8)) g("e6").classList.remove("show");});
-  g("n6").addEventListener("click",next);
+  g("n6").addEventListener("click",function(){ans[6]=g("i6").value;next();});
   g("b6").addEventListener("click",back);
 
   // Choices Q7
